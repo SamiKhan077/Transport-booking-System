@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In Portal</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Log In Portal</h2>
+         <form id="loginForm">
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10,15}" placeholder="Enter your phone number">
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+            </div>
+            <button type="button" onclick="sendVerificationCode()">Send Verification Code</button>
+        </form>
+
+        <div id="verificationSection" style="display:none;">
+            <p>A 6-digit verification code has been sent to your email.</p>
+            <div class="form-group">
+                <label for="code">Enter Verification Code:</label>
+                <input type="text" id="code" name="code" maxlength="6" pattern="[0-9]{6}" required placeholder="Enter 6-digit code">
+            </div>
+            <button type="button" onclick="verifyCode()">Verify</button>
+            <p id="verificationMessage" style="color:red;"></p>
+        </div>
+    </div>
+
+    <script>
+    let generatedCode = "";
+    const googleBtn = document.createElement('button');
+    googleBtn.type = 'button';
+    googleBtn.textContent = 'Log In with Google';
+    googleBtn.style.marginTop = '10px';
+    googleBtn.onclick = function() {
+        // Simulate Google login (for demo purposes)
+        alert('Logged in with Google!');
+    };
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('loginForm').appendChild(googleBtn);
+    });
+
+    function sendVerificationCode() {
+        const email = document.getElementById('email').value;
+        if (!email) {
+            alert("Please enter your email.");
+            return;
+        }
+        document.getElementById('loginForm').appendChild(googleBtn);
+        // Generate a 6-digit code
+        generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
+        // Simulate sending email (for demo purposes)
+        alert("Verification code sent to: " + email + "\nCode: " + generatedCode);
+        document.getElementById('verificationSection').style.display = 'block';
+    }
+
+    function verifyCode() {
+        const code = document.getElementById('code').value;
+        const message = document.getElementById('verificationMessage');
+        if (code === generatedCode) {
+            message.style.color = "green";
+            message.textContent = "Email verified successfully!";
+            message.classList.add('success');
+        } else {
+            message.style.color = "red";
+            message.textContent = "Invalid verification code. Please try again.";
+        }
+    }
+    </script>
+</body>
+</html>

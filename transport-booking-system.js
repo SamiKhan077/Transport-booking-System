@@ -1,5 +1,6 @@
-const fs = require('fs');
-const readline = require('readline-sync');
+import fs from 'fs';
+import readlineSync from 'readline-sync';
+const readline = readlineSync;
 
 // Utility functions for file read/write
 function readData(file) {
@@ -91,15 +92,17 @@ function addSchedule() {
         console.log('Add at least one route and one vehicle first.');
         return;
     }
-    // List routes
+    // Automatically select a random route
     console.log('Available Routes:');
-    routes.forEach(r => console.log(`${r.id}: ${r.from} -> ${r.to} (${r.distance} km)`));
-    const routeId = parseInt(readline.question('Enter route ID: '), 10);
-    const route = routes.find(r => r.id === routeId);
-    if (!route) {
-        console.log('Invalid route ID.');
-        return;
-    }
+    const randomRoutes = routes.sort(() => 0.5 - Math.random()).slice(0, 5); // Show up to 5 random routes
+    // Add reverse routes (both ways)
+    randomRoutes.forEach(route => {
+        routes.push({ id: routes.length + 1, from: route.to, to: route.from, distance: route.distance });
+    });
+    randomRoutes.forEach(route => console.log(`${route.id}: ${route.from} -> ${route.to} (${route.distance} km)`));
+    const route = randomRoutes[0]; // Automatically select the first random route
+    const routeId = route.id;
+    console.log(`Selected Route: ${route.id}: ${route.from} -> ${route.to} (${route.distance} km)`);
     // List vehicles
     console.log('Available Vehicles:');
     vehicles.forEach(v => console.log(`${v.id}: ${v.type} (${v.registrationNumber}, Capacity: ${v.capacity})`));
@@ -202,7 +205,9 @@ function bookTicket() {
         scheduleId,
         passengerName,
         seatsBooked: seatsRequested,
-        fare,
+        fare,status: 'Booked',
+        bookingTime: new Date().toISOString(),
+        routeId: schedule.routeId,
         status: 'Booked'
     });
     writeData(BOOKINGS_FILE, bookings);
@@ -251,5 +256,58 @@ function mainMenu() {
         else console.log('Invalid option.');
     }
 }
+// Admin login function
+function adminLogin() {
+    console.log('\n--- Admin Login ---');
+    const username = readline.question('Enter username: ');
+    const password = readline.question('Enter password: ', { hideEchoBack: true });
+    // Example hardcoded credentials
+    if (username === 'admin' && password === 'password123') {
+        console.log('Login successful!');
+        adminMenu();
+    } else {
+        console.log('Invalid credentials.');
+    }
+}
 
+// View travel history for passengers
+function viewTravelHistory() {
+    console.log('\n--- Travel History ---');
+    const passengerName = readline.question('Enter your name: ');
+    const bookings = readData(BOOKINGS_FILE);
+    const routes = readData(ROUTES_FILE);
+    const schedules = readData(SCHEDULES_FILE);
+    const passengerBookings = bookings.filter(b => b.passengerName === passengerName);
+    if (passengerBookings.length === 0) {
+        console.log('No travel history found.');
+        return;
+    }
+    passengerBookings.forEach(b => {
+        const schedule = schedules.find(s => s.id === b.scheduleId);
+        const route = routes.find(r => r.id === schedule.routeId);
+        console.log(`Booking ${b.id}: ${route.from} -> ${route.to}, Departure: ${schedule.departureTime}, Seats: ${b.seatsBooked}, Fare: ${b.fare}, Status: ${b.status}`);
+    });
+}
+
+// Updated main menu to include admin login and travel history
+function mainMenu() {
+    while (true) {
+        console.log('\n--- Transport Booking System ---');
+        console.log('1. Admin Login');
+        console.log('2. Passenger');
+        console.log('3. Exit');
+        const choice = readline.question('Select option: ');
+        if (choice === '1') adminLogin();
+        else if (choice === '2') {
+            console.log('\n--- Passenger Options ---');
+            console.log('1. Passenger Menu');
+            console.log('2. View Travel History');
+            const passengerChoice = readline.question('Select option: ');
+            if (passengerChoice === '1') passengerMenu();
+            else if (passengerChoice === '2') viewTravelHistory();
+            else console.log('Invalid option.');
+        } else if (choice === '3') break;
+        else console.log('Invalid option.');
+    }
+}
 mainMenu();
