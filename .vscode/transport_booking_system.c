@@ -31,7 +31,6 @@ char in_user[100];
 
     };
 
-
     struct bus
     {
         int seatavb;
@@ -43,7 +42,6 @@ char in_user[100];
         float time;
 
     }bus_obj[48];
-
 
 int abs(int x){
 	if(x<0)
@@ -73,7 +71,6 @@ void signup()
         fclose(ptr);
         ptr = fopen("user.dat", "r");
     }
-    
     // Check if username already exists
     printf("Enter the username:\n");
     scanf("%s",user);
@@ -239,7 +236,7 @@ void login()
 	printf("\t\t\t\t\t\t     UserName : %s\n",in_user);
 	printf("\t\t\t\t\t\t     From     : %s\n",t1.from);
 	printf("\t\t\t\t\t\t     To       : %s\n",t1.to);
-	printf("\t\t\t\t\t\t     Price    :RS.%d\n",t1.price);
+	printf("\t\t\t\t\t\t     Price    :Tk.%d\n",t1.price);
 	printf("\t\t\t\t\t\t***********Ticket Booked***********\n");
 	printf("\t\t\t\t\t\t***********************************\n");
    }

@@ -205,7 +205,7 @@ function bookTicket() {
         scheduleId,
         passengerName,
         seatsBooked: seatsRequested,
-        fare,status: 'Booked',
+        fare,
         bookingTime: new Date().toISOString(),
         routeId: schedule.routeId,
         status: 'Booked'
@@ -243,19 +243,7 @@ function cancelBooking() {
 }
 
 // Main menu
-function mainMenu() {
-    while (true) {
-        console.log('\n--- Transport Booking System ---');
-        console.log('1. Admin Login');
-        console.log('2. Passenger');
-        console.log('3. Exit');
-        const choice = readline.question('Select option: ');
-        if (choice === '1') adminMenu();
-        else if (choice === '2') passengerMenu();
-        else if (choice === '3') break;
-        else console.log('Invalid option.');
-    }
-}
+// (Removed duplicate mainMenu definition. See updated mainMenu below.)
 // Admin login function
 function adminLogin() {
     console.log('\n--- Admin Login ---');
