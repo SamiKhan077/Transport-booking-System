@@ -5,8 +5,6 @@ Return value : Null
 
 */
 #include "validation.h"
-#include <stdio.h>
-#include <string.h>
 void signup()
 {
     char user[100],check[30]="null",pass[30];
@@ -65,6 +63,4 @@ void signup()
   
 
 
-    
-    
     

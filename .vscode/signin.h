@@ -4,6 +4,9 @@ Function name: signin()
 Return Value: NULL
 
 */
+#include"validation.h"
+#include <stdio.h>
+#include <string.h>
 void signin()
 {
     char in_user[100],in_pass[100],in_check[30]={"null"},in_fuser[30],in_fpass[30];

@@ -1,13 +1,3 @@
-/*This module validate the password criteria :
-Funcion name: pass_validate(String)
-Return value: 
-    1->Password Accepted
-    0->Password not Accepted
-*/
-#include <stdio.h>
-#include <string.h>
-#define VALIDATION_H
-
 int pass_validate(char pass[])
 {
     int out,len,i,a[4]={},flag=1;
@@ -70,9 +60,4 @@ int pass_validate(char pass[])
     {
         return 1;
     }
-    
-    
-
 }
-
-
