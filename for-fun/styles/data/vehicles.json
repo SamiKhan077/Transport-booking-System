@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "type": "Bus",
+    "capacity": 50,
+    "registrationNumber": "BUS001"
+  },
+  {
+    "id": 2,
+    "type": "Van",
+    "capacity": 15,
+    "registrationNumber": "VAN001"
+  },
+  {
+    "id": 3,
+    "type": "Bus",
+    "capacity": 45,
+    "registrationNumber": "BUS002"
+  },
+  {
+    "id": 4,
+    "type": "Van",
+    "capacity": 12,
+    "registrationNumber": "VAN002"
+  },
+  {
+    "id": 5,
+    "type": "Bus",
+    "capacity": 55,
+    "registrationNumber": "BUS003"
+  }
+]

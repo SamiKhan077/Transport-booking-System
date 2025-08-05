@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "from": "New York",
+    "to": "Boston",
+    "distance": 350
+  },
+  {
+    "id": 2,
+    "from": "Boston",
+    "to": "New York",
+    "distance": 350
+  },
+  {
+    "id": 3,
+    "from": "Los Angeles",
+    "to": "San Francisco",
+    "distance": 400
+  },
+  {
+    "id": 4,
+    "from": "San Francisco",
+    "to": "Los Angeles",
+    "distance": 400
+  },
+  {
+    "id": 5,
+    "from": "Chicago",
+    "to": "Detroit",
+    "distance": 280
+  },
+  {
+    "id": 6,
+    "from": "Detroit",
+    "to": "Chicago",
+    "distance": 280
+  },
+  {
+    "id": 7,
+    "from": "Miami",
+    "to": "Orlando",
+    "distance": 230
+  },
+  {
+    "id": 8,
+    "from": "Orlando",
+    "to": "Miami",
+    "distance": 230
+  },
+  {
+    "id": 9,
+    "from": "Seattle",
+    "to": "Portland",
+    "distance": 175
+  },
+  {
+    "id": 10,
+    "from": "Portland",
+    "to": "Seattle",
+    "distance": 175
+  }
+]
