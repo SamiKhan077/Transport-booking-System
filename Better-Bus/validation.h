@@ -1,3 +1,7 @@
+#include <stdio.h>
+#include <string.h>
+#define VALIDATION_H
+
 int pass_validate(char pass[])
 {
     int out,len,i,a[4]={},flag=1;
@@ -60,4 +64,7 @@ int pass_validate(char pass[])
     {
         return 1;
     }
+    
+    
+
 }
